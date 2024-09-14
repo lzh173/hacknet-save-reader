@@ -110,8 +110,6 @@ if __name__ == "__main__":
             pass
         
      
-    # 获取存档文件路径
-    while True:
         
         filepath = "save_" + str(input("请输入游戏内名称:")) + ".xml"
         if os.path.exists(filepath):
