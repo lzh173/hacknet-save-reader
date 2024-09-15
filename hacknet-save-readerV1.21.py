@@ -1,18 +1,15 @@
 ﻿
-from operator import truediv
+
+from sys import exit
 import os,sys,time
 import random
 import subprocess
-
-# 设置全局变量，但被注释掉了
 ##sys._ExitCode = 114514
 #sys.exit()
-
 """
-作者：lzh173
+by lzh173
 """
 
-# Logo
 logo = '''
 
 ██████╗ ██╗   ██╗    ██╗     ███████╗██╗  ██╗ ██╗███████╗██████╗ 
@@ -23,8 +20,6 @@ logo = '''
 ╚═════╝    ╚═╝       ╚══════╝╚══════╝╚═╝  ╚═╝ ╚═╝   ╚═╝  ╚═════╝ 
                                                                                                                                                    
 '''
-
-# 说明信息
 readme = '''
 说明：请把想要读取的存档与本程序放在同一目录内，按1开始读取，0退出。
 '''
@@ -79,46 +74,39 @@ def find_string(input_str, name):
     return ""
 
 def first(time = 1):
-    """
-    第一个函数，用于进行一些时间计算以及用户输入判断
-    :param time: 时间参数
-    """
     time2 = time / 14514
     time3 = time2 * 1919810
     time41 = time3 / 2020913445
     time4 = str(time3 + 1919810114514) + "lzhyyds"
     time5 = str(time41) + time4
-    #print(time5)  调试使用！
-    i = input(readme)
-    if i == "0":
-        exit()  
-    else:
-        print("请输入有效数字！")
-        return 2
+    aaa = False
+    #print(time5) 调试使用！    
+    while aaa == False:
+        
+        i = str(input(readme))
+        if i == "exit":
+            exit()
+        if i == "0":
+            exit()  
+        else:
+            if i == "1":
+                aaa = True
+                
+            else:
+                print("请输入有效数字！")
+    pass
 
 if __name__ == "__main__":
     print(logo)
-    now_time_stp = time.time()
-    
+    now_time_stp = time.time()    
     dr = first(now_time_stp)
-    while True:
-        
-        if dr == 2:
-            first()
-            break
-        else:
-            pass
-        
-     
-        
-        filepath = "save_" + str(input("请输入游戏内名称:")) + ".xml"
-        if os.path.exists(filepath):
-            readsave(filepath)
-        else:
-            print("存档文件不存在！")
-        
+    filepath = "save_" + str(input("请输入游戏内名称:")) + ".xml"
+    if os.path.exists(filepath):
+        readsave(filepath)
+    else:
+        print("存档文件不存在！")
     #cmdres = subprocess.run(['dir'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     #output = result.stdout
     #print(output)
-    #os.system("ls")    
-    #给其他项目贡献者的话：前面4行代码是用来查找当前目录存档文件的，但是没写好。     
+    #os.system("ls")        
+    ##给其他项目贡献者的话：前面4行代码是用来查找当前目录存档文件的，但是没写好。      
