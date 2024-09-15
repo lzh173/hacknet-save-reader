@@ -80,6 +80,7 @@ def ystime(time = 114514):
     time4 = str(time3 + 1919810114514) + "lzhyyds"
     time5 = str(time41) + time4
     return time41
+  
 def first(time = 1):
     ystime(time)
     time_as = 0
