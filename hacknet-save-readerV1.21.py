@@ -105,6 +105,9 @@ if __name__ == "__main__":
         readsave(filepath)
     else:
         print("存档文件不存在！")
+
+if __name__ != "__main__":
+    exit()
     #cmdres = subprocess.run(['dir'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     #output = result.stdout
     #print(output)
