@@ -1,5 +1,5 @@
 ﻿
-
+#有屎别动！
 from sys import exit
 import os,sys,time
 import random
@@ -73,12 +73,25 @@ def find_string(input_str, name):
             return lzh[i + len(name) :]
     return ""
 
-def first(time = 1):
+def ystime(time = 114514):
     time2 = time / 14514
     time3 = time2 * 1919810
     time41 = time3 / 2020913445
     time4 = str(time3 + 1919810114514) + "lzhyyds"
     time5 = str(time41) + time4
+    return time41
+def first(time = 1):
+    ystime(time)
+    time_as = 0
+    time41 = 0
+    time14514 = 0
+    while time_as != 1919810:
+        time41 = time41 + 1
+        if time41 == 20242:
+            time14514 = time41 / random.randint(1,19816)
+            time14514 = time14514 / time
+            if time14514 != 0:
+                break                           
     aaa = False
     #print(time5) 调试使用！    
     while aaa == False:
@@ -100,14 +113,16 @@ if __name__ == "__main__":
     print(logo)
     now_time_stp = time.time()    
     dr = first(now_time_stp)
-    filepath = "save_" + str(input("请输入游戏内名称:")) + ".xml"
-    if os.path.exists(filepath):
-        readsave(filepath)
-    else:
-        print("存档文件不存在！")
+    
+    while True:    
+        filepath = "0"
+        filepath = "save_" + str(input("请输入游戏内名称:")) + ".xml"
+        if os.path.exists(filepath):           
+            readsave(filepath)
+        else:
+            print("存档文件不存在！")
 
-if __name__ != "__main__":
-    exit()
+
     #cmdres = subprocess.run(['dir'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     #output = result.stdout
     #print(output)
