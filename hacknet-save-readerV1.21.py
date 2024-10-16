@@ -1,5 +1,4 @@
-﻿
-#有屎别动！
+﻿#有屎别动！
 from sys import exit
 import os,sys,time
 import random
@@ -122,7 +121,7 @@ if __name__ == "__main__":
             readsave(filepath)
         else:
             print("存档文件不存在！")
-
+ 
 
     #cmdres = subprocess.run(['dir'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     #output = result.stdout
