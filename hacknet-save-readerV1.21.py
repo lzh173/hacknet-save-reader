@@ -1,5 +1,8 @@
 ﻿#有屎别动！
+import logging
+from math import log
 from sys import exit
+from loguru import logger
 import os,sys,time
 import random
 import subprocess
@@ -39,7 +42,7 @@ def readsave (filepath) :
         if result != 0:
             if opt == "":
                 opt = "E1"
-                print(opt)
+                logger.critical("存档文件为空")
                 sys._ExitCode = 114514
                 file.close()
                 sys.exit()
@@ -78,6 +81,7 @@ def ystime(time = 114514):
     time41 = time3 / 2020913445
     time4 = str(time3 + 1919810114514) + "lzhyyds"
     time5 = str(time41) + time4
+    logger.debug(str(time41)+str(time5))
     return time41
   
 def first(time = 1):
@@ -91,6 +95,7 @@ def first(time = 1):
             time14514 = time41 / random.randint(1,19816)
             time14514 = time14514 / time
             if time14514 != 0:
+                logger.debug(str(time)+str(time14514))
                 break                           
     aaa = False
     #print(time5) 调试使用！    
@@ -100,29 +105,35 @@ def first(time = 1):
         if i == "exit":
             exit()
         if i == "0":
+            logger.debug("退出")
             exit()  
         else:
             if i == "1":
                 aaa = True
                 
             else:
-                print("请输入有效数字！")
+                logger.error("请输入有效数字！")
     pass
 
 if __name__ == "__main__":
+    a = "E074BD69-05F7-458A-B732-DA5F24914098"
+    logger.add("log.txt")
     print(logo)
+    logger.debug(a)
     now_time_stp = time.time()    
     dr = first(now_time_stp)
     
     while True:    
         filepath = "0"
         filepath = "save_" + str(input("请输入游戏内名称:")) + ".xml"
+        if filepath == "save_" + "exit" + ".xml":
+            logger.info("退出")
+            exit()
         if os.path.exists(filepath):           
             readsave(filepath)
         else:
-            print("存档文件不存在！")
+            logger.error("存档文件不存在！")
  
-
     #cmdres = subprocess.run(['dir'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     #output = result.stdout
     #print(output)
