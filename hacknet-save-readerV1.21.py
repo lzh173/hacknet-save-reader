@@ -99,7 +99,7 @@ def first(time = 1):
                 logger.debug(str(time)+str(time14514))
                 break                           
     aaa = False
-    #print(time5) 调试使用！    
+      
     while aaa == False:
         
         i = str(input(readme))
