@@ -32,6 +32,7 @@ def readsave (filepath) :
     :param filepath: 存档文件路径
     """
     file = open(filepath, 'r', encoding='utf-8')
+    logger.info("已经开始读取，如果超过5秒没有输出就是你存档格式不对或没数据")
     line = 1
     while True:
         line = line + 1
