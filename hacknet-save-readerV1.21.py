@@ -10,6 +10,7 @@ import random
 import subprocess
 ##sys._ExitCode = 114514
 #sys.exit()
+logger.info("日志文件名：log.txt")
 """
 by lzh173
 """
