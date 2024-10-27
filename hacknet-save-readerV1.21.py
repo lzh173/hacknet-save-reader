@@ -1,6 +1,8 @@
 ﻿#有屎别动！
 import logging
 from math import log
+from pickletools import pybool
+import re
 from sys import exit
 from loguru import logger
 import os,sys,time
@@ -23,15 +25,16 @@ logo = '''
                                                                                                                                                    
 '''
 readme = '''
-说明：请把想要读取的存档与本程序放在同一目录内，按1开始读取，0退出。
+说明：按1读取同目录下的存档文件，2读取游戏默认目录下的存档，0退出。
 '''
 
-def readsave (filepath) :
+def readsave (filepath,file) :
     """
     读取存档的函数
     :param filepath: 存档文件路径
+    :param file:传入打开的文件实例
     """
-    file = open(filepath, 'r', encoding='utf-8')
+    logger.debug("文件路径:" + filepath)
     logger.info("已经开始读取，如果超过5秒没有输出就是你存档格式不对或没数据")
     line = 1
     while True:
@@ -84,6 +87,13 @@ def ystime(time = 114514):
     time5 = str(time41) + time4
     logger.debug(str(time41)+str(time5))
     return time41
+
+def get_savename(savefn):
+    save = str(savefn)
+    save_file_namelen = len(save)
+    opt = save[5 : (save_file_namelen - 4)]
+    return opt
+
   
 def first(time = 1):
     ystime(time)
@@ -113,7 +123,30 @@ def first(time = 1):
                 aaa = True
                 
             else:
-                logger.error("请输入有效数字！")
+                if i == "2":
+                    #变量savePath是游戏默认存档存放目录，一般都是这个
+                    savePath = os.path.expanduser("~\Documents\My Games\Hacknet\Accounts")
+                    savepathfile = os.listdir(savePath)
+                    logger.debug("存档目录下文件:" + str(savepathfile))
+                    listleng = len(savepathfile)
+                    save = savepathfile[2 : listleng]
+                    if save == []:
+                        logger.critical("未找到存档文件")
+                    logger.debug("存档文件：" + str(save))
+                    for a in save[0 : listleng]:                    
+                        pleayname = get_savename(a)
+                        logger.info("找到的玩家:" + pleayname)
+                    filepath = str(savePath) + "//save_" + str(input("请输入玩家名:")) + ".xml"
+                    if os.path.exists(filepath):
+                       
+                        file = open(filepath, 'r', encoding='utf-8')
+                        readsave(filepath,file)
+                    else:
+                        logger.error("玩家不存在")
+                else:
+                    
+
+                    logger.error("请输入有效数字！")
     pass
 
 if __name__ == "__main__":
@@ -127,16 +160,13 @@ if __name__ == "__main__":
     while True:    
         filepath = "0"
         filepath = "save_" + str(input("请输入游戏内名称:")) + ".xml"
+        file = open(filepath,"r",encoding='utf-8')
         if filepath == "save_" + "exit" + ".xml":
             logger.info("退出")
             exit()
         if os.path.exists(filepath):           
-            readsave(filepath)
+            readsave(filepath,file)
         else:
             logger.error("存档文件不存在！")
- 
-    #cmdres = subprocess.run(['dir'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    #output = result.stdout
-    #print(output)
-    #os.system("ls")        
-    ##给其他项目贡献者的话：前面4行代码是用来查找当前目录存档文件的，但是没写好。      
+
+
