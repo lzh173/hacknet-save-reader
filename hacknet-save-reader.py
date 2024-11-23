@@ -38,9 +38,10 @@ def readsave (filepath,file) :
     opt = ""
     logger.debug("文件路径:" + filepath)
     logger.info("已经开始读取，如果超过5秒没有输出就是你存档格式不对或没数据")
-    line = 1
+    line = 23
     gs = 1
     while True:
+   
         line = line + 1
         filedata = file.readline(line)
         result = extract_string(filedata, '<computer name=')
