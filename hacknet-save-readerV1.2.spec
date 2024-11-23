@@ -2,7 +2,7 @@
 
 
 a = Analysis(
-    ['C:\\Users\\12940\\Desktop\\hacknet-save-readerV1.2.py'],
+    ['hacknet-save-readerV1.2.py'],
     pathex=[],
     binaries=[],
     datas=[],
