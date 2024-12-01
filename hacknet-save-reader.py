@@ -36,21 +36,33 @@ def readsave (filepath,file) :
     :param file:传入打开的文件实例
     """
     opt = ""
+    out3 = ""
     logger.debug("文件路径:" + filepath)
     logger.info("已经开始读取，如果超过5秒没有输出就是你存档格式不对或没数据")
     line = 23
-    gs = 1
+    gs = 0
     while True:
    
         line = line + 1
         filedata = file.readline(line)
         result = extract_string(filedata, '<computer name=')
+        result2 = extract_string(filedata, '<firewall complexity="0" solution="')
+        if result2:
+            
+            b = filedata.split('"')
+            out11 = (b[3])
+            out3 = "   存在防火墙" + "密码:" + out11
         if result:
-                gs = gs+1
-                a = filedata.split('"')
-                out1 = (a[1])
-                out2 = (a[3])
-                out = "节点" + str(gs) + ":" + out1 + "  ip:" + out2
+            gs = gs+1
+            a = filedata.split('"')
+            out1 = (a[1])
+            out2 = (a[3])
+            if out3 != "":               
+                out = "节点" + str(gs) + ":" + out1 + "  ip:" + out2 + str(out3)
+                print(out)
+                out3 = ""
+            else:
+                out = "节点" + str(gs) + ":" + out1 + "  ip:" + out2 + "   没有防火墙"
                 print(out)
 
 
@@ -173,11 +185,14 @@ if __name__ == "__main__":
     while True:    
         filepath = "0"
         filepath = "save_" + str(input("请输入游戏内名称:")) + ".xml"
-        file = open(filepath,"r",encoding='utf-8')
+        if filepath == "save_.xml":
+            logger.critical("输入不能为空！")
+        
         if filepath == "save_" + "exit" + ".xml":
             logger.info("退出")
             exit()
-        if os.path.exists(filepath):           
+        if os.path.exists(filepath):
+            file = open(filepath,"r",encoding='utf-8')
             readsave(filepath,file)
         else:
             logger.error("存档文件不存在！")
