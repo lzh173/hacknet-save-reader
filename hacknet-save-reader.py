@@ -35,24 +35,35 @@ def readsave (filepath,file) :
     :param filepath: 存档文件路径
     :param file:传入打开的文件实例
     """
+    opt = ""
     logger.debug("文件路径:" + filepath)
     logger.info("已经开始读取，如果超过5秒没有输出就是你存档格式不对或没数据")
     line = 1
+    gs = 1
     while True:
         line = line + 1
         filedata = file.readline(line)
         result = extract_string(filedata, '<computer name=')
-        opt = find_string(result, "ter")
+        if result:
+                gs = gs+1
+                a = filedata.split('"')
+                out1 = (a[1])
+                out2 = (a[3])
+                out = "节点" + str(gs) + ":" + out1 + "  ip:" + out2
+                print(out)
+
+
+        #opt = find_string(result, "ter")
         #print(result)
-        if result != 0:
-            if opt == "":
-                opt = "E1"
-                logger.critical("存档文件为空")
-                sys._ExitCode = 114514
-                file.close()
-                sys.exit()
-                break
-            print(opt)
+        #if result != 0:
+        #   if opt == "":
+        #       opt = "E1"
+        #       logger.critical("存档文件为空")
+        #       sys._ExitCode = 114514
+        #       file.close()
+        #       sys.exit()
+        #       break
+        #print(opt)
     pass
 
 def extract_string(input_str, name):
@@ -63,9 +74,9 @@ def extract_string(input_str, name):
     :return: 提取出来的子串或0
     """
     if name in input_str:
-        return input_str[input_str.index(name) + 1 : input_str.index(name) + 85]
+        return True
     else:
-        return 0
+        return False
 
 def find_string(input_str, name):
     """
