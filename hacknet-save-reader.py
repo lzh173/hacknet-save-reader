@@ -1,7 +1,5 @@
 ﻿#有屎别动！
 import logging
-from math import log
-from pickletools import pybool
 import re
 from sys import exit
 from loguru import logger

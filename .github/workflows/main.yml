@@ -1,0 +1,36 @@
+name: Build EXE with PyInstaller
+on:
+  push:
+    branches: [ "main" ]  # 监听 main 分支的推送
+
+jobs:
+  build:
+    runs-on: windows-latest  # 必须使用 Windows 环境
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4  # 拉取代码
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"  
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt  # 安装项目依赖
+          pip install pyinstaller  # 安装 PyInstaller
+
+
+      - name: Build EXE with PyInstaller
+        run: |
+      
+          pyinstaller --onefile --clean hacknet-save-reader.py
+          # 可选参数：--icon=your_icon.ico （添加图标）
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: executable
+          path: dist/  # PyInstaller 默认输出目录
+          if-no-files-found: error
